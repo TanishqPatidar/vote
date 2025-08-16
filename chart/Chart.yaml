@@ -1,0 +1,5 @@
+apiVersion: v2
+name: vote
+version: 0.1.0
+description: Voting app (web+api)
+type: application
