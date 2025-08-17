@@ -15,6 +15,6 @@ spec:
           image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag }}"
           ports: [{ containerPort: {{ .Values.api.port }} }]
           readinessProbe:
-            httpGet: { path: "/health", port: {{ .Values.api.port }} }
+            httpGet: { path: "/api/health", port: {{ .Values.api.port }} }
           livenessProbe:
-            httpGet: { path: "/health", port: {{ .Values.api.port }} }
+            httpGet: { path: "/api/health", port: {{ .Values.api.port }} }
