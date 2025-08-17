@@ -1,20 +1,10 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
   name: web
   namespace: {{ .Values.namespace }}
   labels: { app: web }
 spec:
-  replicas: {{ default 1 .Values.web.replicaCount }}
-  selector: { matchLabels: { app: web } }
-  template:
-    metadata: { labels: { app: web } }
-    spec:
-      containers:
-        - name: web
-          image: "{{ .Values.web.image.repository }}:{{ .Values.web.image.tag }}"
-          ports: [{ containerPort: {{ .Values.web.port }} }]
-          readinessProbe:
-            httpGet: { path: "/", port: {{ .Values.web.port }} }
-          livenessProbe:
-            httpGet: { path: "/", port: {{ .Values.web.port }} }
+  type: ClusterIP
+  selector: { app: web }
+  ports: [{ port: 80, targetPort: {{ .Values.web.port }} }]
